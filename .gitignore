@@ -57,6 +57,7 @@ docker-entrypoint.sh
 # Configuration
 configuration/
 secrets/
+run
 
 # exception to the rule: we need folders!
 !db/certs/.gitkeep
