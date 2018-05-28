@@ -1,0 +1,25 @@
+version: '3.1'
+services:
+    imguploader-server:
+        build: .
+        image: imguploader-server-img
+        container_name: imguploader-server
+        hostname: example.home.imguploader
+        restart: always
+        secrets:
+            - MONGO_USERNAME
+            - MONGO_PASSWORD
+        ports:
+            - '8888:8888'
+        environment:
+            - DOCKER_SECRET_LOC=/run/secrets/
+            - 'IMGUPL_MONGO_ADDR=mongodb-3.6.3-pass:27017'
+secrets:
+    MONGO_USERNAME:
+        file: ./run/secrets/MONGO_USERNAME
+    MONGO_PASSWORD:
+        file: ./run/secrets/MONGO_PASSWORD
+networks:
+    default:
+        external:
+            name: dev-network

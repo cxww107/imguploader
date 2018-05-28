@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package image;
+
+message Void {
+    string msg = 1;
+}
+
+message File {
+    // Unix Timestamp from Created at
+    int64 unixCreatedAt = 1; 
+    // Image in bytes
+    bytes data = 2;
+    // Is already processed
+    bool processed = 3;
+    // extension of file
+    string extension = 4;
+    string filename = 5;
+}
+
+message ID{
+    string ID = 1;
+}
+
+message IDs{
+    repeated string ids = 1;
+}
+
+message Files {
+    repeated File files = 1;
+}
+
+message Count{
+    int64 count = 1;
+}
+
+service FileHandler {
+    rpc GetNewImagesIDs(Void) returns(IDs) {}
+    rpc GetImage(ID) returns(File){}
+    rpc GetCount(Void) returns(Count) {}
+    rpc PostImage(File) returns(Void){}
+    rpc MarkProcessed(ID) returns(Void){}
+}
